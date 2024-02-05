@@ -7,7 +7,6 @@ import {
   CartoLayer,
   setDefaultCredentials,
   MAP_TYPES,
-  API_VERSIONS,
 } from "@deck.gl/carto/typed";
 
 import "./Map.css";
