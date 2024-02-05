@@ -1,0 +1,13 @@
+#root {
+  height: 100vh;
+}
+
+.toolbar {
+  height: 200px;
+}
+
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 200px);
+}
