@@ -6,16 +6,16 @@ import Toolbar from "./Toolbar";
 import "./App.css";
 
 function App() {
-  const [layersColor, setLayersColor] = useState({
-    stores: [238, 77, 90],
-    airports: [53, 94, 59],
-    blockground: [231, 159, 213],
+  const [layers, setLayers] = useState({
+    stores: { visible: true, color: [234, 30, 47] },
+    airports: { visible: true, color: [65, 157, 80] },
+    blockground: { visible: true, color: [231, 159, 213] },
   });
 
   return (
     <>
-      <Toolbar layersColor={layersColor} setLayersColor={setLayersColor} />
-      <Map layersColor={layersColor} />
+      <Toolbar layers={layers} setLayers={setLayers} />
+      <Map layers={layers} />
     </>
   );
 }

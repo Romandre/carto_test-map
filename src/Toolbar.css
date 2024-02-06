@@ -4,8 +4,51 @@
 
 .layers {
   display: flex;
+  gap: 1rem;
 }
 
 .layers > div {
+  position: relative;
   flex-basis: 33.3%;
+  padding: 1rem;
+  background: #eeeeee;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.color-tile {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #666666;
+  vertical-align: middle;
+  margin-right: 8px;
+  transition: 0.3s;
+}
+
+.title {
+  margin-bottom: 2rem;
+  font-size: 18px;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.layer-trigger,
+.color-trigger {
+  display: block;
+  margin: 1rem auto;
+}
+
+.color-picker {
+  position: absolute;
+  display: none;
+  left: calc(50% - 110px);
+  width: 220px;
+  margin-top: 1rem;
+  z-index: 1;
+}
+
+.color-picker.active {
+  display: block;
 }

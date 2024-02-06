@@ -1,5 +1,10 @@
+type TLayerContent = {
+  visible: boolean;
+  color: number[];
+};
+
 export type TLayers = {
-  stores: number[];
-  airports: number[];
-  blockground: number[];
+  stores: TLayerContent;
+  airports: TLayerContent;
+  blockground: TLayerContent;
 };

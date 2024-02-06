@@ -11,6 +11,8 @@ import { TLayers } from "./types/layers";
 
 import "./Map.css";
 
+//---------------------------------------------
+
 setDefaultCredentials({
   accessToken:
     "eyJhbGciOiJIUzI1NiJ9.eyJhIjoiYWNfbnExaGw4czUiLCJqdGkiOiJiNjIxMjNlZiJ9.1whcmZMjThY5gV5aQUHJrievAGAp2RLGOLey1u9dy9g",
@@ -26,19 +28,22 @@ const INITIAL_VIEW_STATE = {
 };
 
 type Props = {
-  layersColor: TLayers;
+  layers: TLayers;
 };
 
-function Map({ layersColor }: Props) {
+//---------------------------------------------
+
+function Map({ layers }: Props) {
   const retailStoresLayer = new CartoLayer({
     id: "stores",
     type: MAP_TYPES.QUERY,
     connection: "carto_dw",
     data: "SELECT * FROM `carto-demo-data.demo_tables.retail_stores`",
     pointRadiusMinPixels: 3,
+    getFillColor: layers.stores.color,
     getLineColor: [0, 0, 0, 200],
-    getFillColor: layersColor.stores,
     lineWidthMinPixels: 1,
+    visible: layers.stores.visible,
   });
 
   const worldAirportsLayer = new CartoLayer({
@@ -47,9 +52,10 @@ function Map({ layersColor }: Props) {
     connection: "carto_dw",
     data: "SELECT * FROM `carto-demo-data.demo_tables.world_airports`",
     pointRadiusMinPixels: 2,
+    getFillColor: layers.airports.color,
     getLineColor: [0, 0, 0, 200],
-    getFillColor: layersColor.airports,
     lineWidthMinPixels: 1,
+    visible: layers.airports.visible,
   });
 
   const blockgroupLayer = new CartoLayer({
@@ -57,10 +63,11 @@ function Map({ layersColor }: Props) {
     type: MAP_TYPES.TILESET,
     connection: "carto_dw",
     data: "`carto-demo-data.demo_tilesets.sociodemographics_usa_blockgroup`",
-    getFillColor: layersColor.blockground,
+    getFillColor: layers.blockground.color,
     pointRadiusMinPixels: 2,
     stroked: false,
     opacity: 0.5,
+    visible: layers.blockground.visible,
   });
 
   return (

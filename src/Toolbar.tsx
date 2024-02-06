@@ -1,39 +1,108 @@
 import { useCallback, useState } from "react";
+import { SketchPicker } from "react-color";
 
 import { TLayers } from "./types/layers";
+import { ColorResult } from "react-color";
 
 import "./Toolbar.css";
 
+//---------------------------------------------
+
+const titles = ["Retail stores", "World Airports", "USA Sociodemographics"];
+
 type Props = {
-  layersColor: TLayers;
-  setLayersColor: React.Dispatch<React.SetStateAction<TLayers>>;
+  layers: TLayers;
+  setLayers: React.Dispatch<React.SetStateAction<TLayers>>;
 };
 
-function Toolbar({ layersColor, setLayersColor }: Props) {
-  const changeColor = useCallback(
+//---------------------------------------------
+
+function Toolbar({ layers, setLayers }: Props) {
+  const [activePicker, setActivePicker] = useState("");
+
+  const showColorPicker = useCallback(
     (item: string) => {
-      setLayersColor((prev) => ({ ...prev, [item]: [215, 3, 252] }));
+      setActivePicker(item);
     },
-    [setLayersColor]
+    [setActivePicker]
+  );
+
+  const changeColor = useCallback(
+    (color: ColorResult, item: string) => {
+      const layerObject = {
+        ...layers[item as keyof TLayers],
+        color: [color.rgb.r, color.rgb.g, color.rgb.b],
+      };
+
+      setLayers((prev) => ({
+        ...prev,
+        [item]: layerObject,
+      }));
+    },
+    [layers, setLayers]
+  );
+
+  const toggleLayer = useCallback(
+    (item: string) => {
+      const layerObject = {
+        ...layers[item as keyof TLayers],
+        visible: !layers[item as keyof TLayers].visible,
+      };
+
+      setLayers((prev) => ({
+        ...prev,
+        [item]: layerObject,
+      }));
+    },
+    [layers, setLayers]
   );
 
   return (
     <div className="toolbar">
       <div className="layers">
-        <div>
-          <h3>Retail stores</h3>
-          <button onClick={() => changeColor("stores")}>Change color</button>
-        </div>
-        <div>
-          <h3>World Airports</h3>
-          <button onClick={() => changeColor("airports")}>Change color</button>
-        </div>
-        <div>
-          <h3>USA Sociodemographics</h3>
-          <button onClick={() => changeColor("blockground")}>
-            Change color
-          </button>
-        </div>
+        {Object.values(layers).map((item, index) => {
+          const layerName = Object.keys(layers)[index];
+          const rgb = {
+            r: item.color[0],
+            g: item.color[1],
+            b: item.color[2],
+          };
+
+          return (
+            <div key={index}>
+              <div className="title">
+                <span
+                  className="color-tile"
+                  style={{ background: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})` }}
+                ></span>
+                <span>{titles[index]}</span>
+              </div>
+              <button
+                className="layer-trigger"
+                onClick={() => toggleLayer(layerName)}
+              >
+                {item.visible ? "Disable" : "Enable"}
+              </button>
+              <button
+                className="color-trigger"
+                onClick={() => showColorPicker(layerName)}
+              >
+                Change color
+              </button>
+              <div
+                className={`color-picker ${
+                  activePicker === layerName ? "active" : ""
+                }`}
+                onMouseLeave={() => setActivePicker("")}
+              >
+                <SketchPicker
+                  color={rgb}
+                  onChangeComplete={(color) => changeColor(color, layerName)}
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
