@@ -1,5 +1,3 @@
-"use client";
-
 import DeckGL from "@deck.gl/react/typed";
 import StaticMap from "react-map-gl";
 import {
@@ -8,6 +6,8 @@ import {
   setDefaultCredentials,
   MAP_TYPES,
 } from "@deck.gl/carto/typed";
+
+import { TLayers } from "./types/layers";
 
 import "./Map.css";
 
@@ -25,7 +25,11 @@ const INITIAL_VIEW_STATE = {
   bearing: 0,
 };
 
-function Map() {
+type Props = {
+  layersColor: TLayers;
+};
+
+function Map({ layersColor }: Props) {
   const retailStoresLayer = new CartoLayer({
     id: "stores",
     type: MAP_TYPES.QUERY,
@@ -33,7 +37,7 @@ function Map() {
     data: "SELECT * FROM `carto-demo-data.demo_tables.retail_stores`",
     pointRadiusMinPixels: 3,
     getLineColor: [0, 0, 0, 200],
-    getFillColor: [238, 77, 90],
+    getFillColor: layersColor.stores,
     lineWidthMinPixels: 1,
   });
 
@@ -44,26 +48,23 @@ function Map() {
     data: "SELECT * FROM `carto-demo-data.demo_tables.world_airports`",
     pointRadiusMinPixels: 2,
     getLineColor: [0, 0, 0, 200],
-    getFillColor: [53, 94, 59],
+    getFillColor: layersColor.airports,
     lineWidthMinPixels: 1,
   });
 
   const blockgroupLayer = new CartoLayer({
     id: "blockgroup",
-    type: MAP_TYPES.QUERY,
+    type: MAP_TYPES.TILESET,
     connection: "carto_dw",
-    data: "SELECT * FROM `carto-demo-data.demo_tileset.sociodemographics_usa_blockgroup`",
+    data: "`carto-demo-data.demo_tilesets.sociodemographics_usa_blockgroup`",
+    getFillColor: layersColor.blockground,
     pointRadiusMinPixels: 2,
-    getLineColor: [0, 0, 0, 200],
-    getFillColor: [53, 94, 59],
-    lineWidthMinPixels: 1,
+    stroked: false,
+    opacity: 0.5,
   });
 
   return (
     <>
-      <div className="toolbar">
-        <span>Toolbar</span>
-      </div>
       <div className="map-wrapper">
         <DeckGL
           initialViewState={INITIAL_VIEW_STATE}

@@ -1,0 +1,11 @@
+.toolbar {
+  height: 200px;
+}
+
+.layers {
+  display: flex;
+}
+
+.layers > div {
+  flex-basis: 33.3%;
+}
