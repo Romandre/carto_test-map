@@ -1,4 +1,3 @@
-import { memo } from "react";
 import DeckGL from "@deck.gl/react/typed";
 import StaticMap from "react-map-gl";
 import {
