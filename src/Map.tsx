@@ -41,8 +41,8 @@ function Map({ layers }: Props) {
     data: "SELECT * FROM `carto-demo-data.demo_tables.retail_stores`",
     pointRadiusMinPixels: 3,
     getFillColor: layers.stores.color,
-    getLineColor: [0, 0, 0, 200],
-    lineWidthMinPixels: 1,
+    getLineColor: layers.stores.outline_color,
+    lineWidthMinPixels: layers.stores.outline,
     visible: layers.stores.visible,
   });
 
@@ -51,10 +51,10 @@ function Map({ layers }: Props) {
     type: MAP_TYPES.QUERY,
     connection: "carto_dw",
     data: "SELECT * FROM `carto-demo-data.demo_tables.world_airports`",
-    pointRadiusMinPixels: 2,
+    pointRadiusMinPixels: layers.airports.radius,
     getFillColor: layers.airports.color,
-    getLineColor: [0, 0, 0, 200],
-    lineWidthMinPixels: 1,
+    getLineColor: layers.airports.outline_color,
+    lineWidthMinPixels: layers.airports.outline,
     visible: layers.airports.visible,
   });
 
@@ -64,7 +64,6 @@ function Map({ layers }: Props) {
     connection: "carto_dw",
     data: "`carto-demo-data.demo_tilesets.sociodemographics_usa_blockgroup`",
     getFillColor: layers.blockground.color,
-    pointRadiusMinPixels: 2,
     stroked: false,
     opacity: 0.5,
     visible: layers.blockground.visible,

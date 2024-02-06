@@ -7,8 +7,20 @@ import "./App.css";
 
 function App() {
   const [layers, setLayers] = useState({
-    stores: { visible: true, color: [234, 30, 47] },
-    airports: { visible: true, color: [65, 157, 80] },
+    stores: {
+      visible: true,
+      color: [234, 30, 47],
+      radius: 5,
+      outline: 1,
+      outline_color: [0, 0, 0],
+    },
+    airports: {
+      visible: true,
+      color: [65, 157, 80],
+      radius: 3,
+      outline: 1,
+      outline_color: [0, 0, 0],
+    },
     blockground: { visible: true, color: [231, 159, 213] },
   });
 
