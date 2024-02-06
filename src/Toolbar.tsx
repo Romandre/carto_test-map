@@ -47,6 +47,7 @@ function Toolbar({ layers, setLayers }: Props) {
   const changeColor = useCallback(
     (color: ColorResult, item: string) => {
       let layerObject = {};
+
       if (colorType === "fill") {
         layerObject = {
           ...layers[item as keyof TLayers],
@@ -65,6 +66,30 @@ function Toolbar({ layers, setLayers }: Props) {
       }));
     },
     [layers, setLayers, colorType]
+  );
+
+  const handleRadiusChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>, item: string) => {
+      let layerObject = {};
+
+      if (event.target.id === "radius") {
+        layerObject = {
+          ...layers[item as keyof TLayers],
+          radius: Number(event.target.value),
+        };
+      } else {
+        layerObject = {
+          ...layers[item as keyof TLayers],
+          outline: Number(event.target.value),
+        };
+      }
+
+      setLayers((prev) => ({
+        ...prev,
+        [item]: layerObject,
+      }));
+    },
+    [layers, setLayers]
   );
 
   return (
@@ -108,26 +133,60 @@ function Toolbar({ layers, setLayers }: Props) {
               >
                 {item.visible ? "Disable" : "Enable"}
               </button>
-              {item.color ? (
-                <button
-                  className="color-trigger"
-                  onClick={() => showColorPicker(layerName, "fill")}
-                >
-                  Change fill color
-                </button>
-              ) : (
-                ""
-              )}
-              {"outline_color" in item ? (
-                <button
-                  className="color-trigger"
-                  onClick={() => showColorPicker(layerName, "outline")}
-                >
-                  Change outline color
-                </button>
-              ) : (
-                ""
-              )}
+              <div className="triggers-wrapper">
+                {item.color ? (
+                  <button
+                    className="color-trigger"
+                    onClick={() => showColorPicker(layerName, "fill")}
+                  >
+                    Change fill color
+                  </button>
+                ) : (
+                  ""
+                )}
+                {"outline_color" in item ? (
+                  <button
+                    className="color-trigger"
+                    onClick={() => showColorPicker(layerName, "outline")}
+                  >
+                    Change outline color
+                  </button>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="triggers-wrapper">
+                {"radius" in item ? (
+                  <div className="radius-trigger">
+                    <div>Point radius</div>
+                    <input
+                      id="radius"
+                      type="number"
+                      value={item.radius}
+                      min="0"
+                      max="100"
+                      onChange={(event) => handleRadiusChange(event, layerName)}
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
+                {"outline" in item ? (
+                  <div className="radius-trigger">
+                    <div>Outline radius</div>
+                    <input
+                      id="outline"
+                      type="number"
+                      value={item.outline}
+                      min="0"
+                      max="100"
+                      onChange={(event) => handleRadiusChange(event, layerName)}
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
               <div
                 className={`color-picker ${
                   activePicker === layerName ? "active" : ""

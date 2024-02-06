@@ -1,3 +1,4 @@
+import { memo } from "react";
 import DeckGL from "@deck.gl/react/typed";
 import StaticMap from "react-map-gl";
 import {
@@ -39,7 +40,7 @@ function Map({ layers }: Props) {
     type: MAP_TYPES.QUERY,
     connection: "carto_dw",
     data: "SELECT * FROM `carto-demo-data.demo_tables.retail_stores`",
-    pointRadiusMinPixels: 3,
+    pointRadiusMinPixels: layers.stores.radius,
     getFillColor: layers.stores.color,
     getLineColor: layers.stores.outline_color,
     lineWidthMinPixels: layers.stores.outline,

@@ -1,5 +1,5 @@
 .toolbar {
-  height: 300px;
+  height: var(--toolbar-height);
 }
 
 .layers {
@@ -20,24 +20,36 @@
   display: inline-block;
   width: 20px;
   height: 20px;
+  margin-right: 8px;
   border-radius: 50%;
   border: 1px solid #666666;
-  vertical-align: middle;
-  margin-right: 8px;
+  vertical-align: text-bottom;
   transition: 0.3s;
 }
 
 .title {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-size: 18px;
   font-weight: 600;
   vertical-align: middle;
 }
 
-.layer-trigger,
-.color-trigger {
+.triggers-wrapper {
   display: block;
-  margin: 1rem auto;
+}
+
+.layer-trigger,
+.color-trigger,
+.radius-trigger {
+  display: inline-block;
+  margin: 0.5rem 0.5rem;
+}
+
+.radius-trigger:first-of-type {
+  margin-right: 2rem;
+}
+.radius-trigger:last-of-type {
+  margin-left: 2rem;
 }
 
 .color-picker {
@@ -51,4 +63,12 @@
 
 .color-picker.active {
   display: block;
+}
+
+@media (max-width: 958px) {
+  .radius-trigger:first-of-type,
+  .radius-trigger:last-of-type {
+    margin-right: 8px;
+    margin-left: 8px;
+  }
 }
