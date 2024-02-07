@@ -4,6 +4,13 @@ A React + TypeScript application with a map and layers from CARTO.
 
 App link: [carto-map-test-app](https://carto-map-test-app.netlify.app/)
 
+For local use, clone the repo, go to cloned "carto_test-map" directory and run following:
+
+```bash
+npm install
+npm run dev
+```
+
 ## Documentation
 
 The app is created using React Vite as a build tool, which proved its simplicity and stability in use. The app is hosted on Netlify, as it is a free source and has nice integration with GitHub for quick app deployment.
