@@ -1,4 +1,4 @@
-# carto_test-map
+# Simple React application with 3 layers from CARTO
 
 A React + TypeScript application with a map and layers from CARTO.
 
