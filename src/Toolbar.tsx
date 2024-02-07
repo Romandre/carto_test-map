@@ -21,14 +21,6 @@ function Toolbar({ layers, setLayers }: Props) {
   const [activePicker, setActivePicker] = useState("");
   const [colorType, setColorType] = useState("fill");
 
-  const showColorPicker = useCallback(
-    (item: string, type: string) => {
-      setActivePicker(item);
-      setColorType(type);
-    },
-    [setActivePicker, setColorType]
-  );
-
   const toggleLayer = useCallback(
     (item: string) => {
       const layerObject = {
@@ -42,6 +34,18 @@ function Toolbar({ layers, setLayers }: Props) {
       }));
     },
     [layers, setLayers]
+  );
+
+  const showColorPicker = useCallback(
+    (item: string, type: string) => {
+      if (activePicker === "") {
+        setActivePicker(item);
+        setColorType(type);
+      } else {
+        setActivePicker("");
+      }
+    },
+    [activePicker, setActivePicker, setColorType]
   );
 
   const changeColor = useCallback(
@@ -72,17 +76,10 @@ function Toolbar({ layers, setLayers }: Props) {
     (event: React.ChangeEvent<HTMLInputElement>, item: string) => {
       let layerObject = {};
 
-      if (event.target.id === "radius") {
-        layerObject = {
-          ...layers[item as keyof TLayers],
-          radius: Number(event.target.value),
-        };
-      } else {
-        layerObject = {
-          ...layers[item as keyof TLayers],
-          outline: Number(event.target.value),
-        };
-      }
+      layerObject = {
+        ...layers[item as keyof TLayers],
+        [event.target.id]: Number(event.target.value),
+      };
 
       setLayers((prev) => ({
         ...prev,
@@ -163,8 +160,8 @@ function Toolbar({ layers, setLayers }: Props) {
                       id="radius"
                       type="number"
                       value={item.radius}
-                      min="0"
-                      max="100"
+                      min="1"
+                      max="50"
                       onChange={(event) => handleRadiusChange(event, layerName)}
                     />
                   </div>
@@ -179,7 +176,7 @@ function Toolbar({ layers, setLayers }: Props) {
                       type="number"
                       value={item.outline}
                       min="0"
-                      max="100"
+                      max="50"
                       onChange={(event) => handleRadiusChange(event, layerName)}
                     />
                   </div>

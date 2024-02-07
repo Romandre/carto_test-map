@@ -6,6 +6,7 @@ import Toolbar from "./Toolbar";
 import "./App.css";
 
 function App() {
+  // Initial properties for layers
   const [layers, setLayers] = useState({
     stores: {
       visible: true,

@@ -55,6 +55,7 @@
 .color-picker {
   position: absolute;
   display: none;
+  bottom: -230px;
   left: calc(50% - 110px);
   width: 220px;
   margin-top: 1rem;
