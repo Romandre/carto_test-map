@@ -1,9 +1,9 @@
 type TableLayer = {
   visible: boolean;
   color: number[];
+  outline_color: number[];
   radius: number;
   outline: number;
-  outline_color: number[];
 };
 
 type TilesetLayer = {

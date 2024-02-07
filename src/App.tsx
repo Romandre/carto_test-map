@@ -11,18 +11,21 @@ function App() {
     stores: {
       visible: true,
       color: [234, 30, 47],
+      outline_color: [0, 0, 0],
       radius: 5,
       outline: 1,
-      outline_color: [0, 0, 0],
     },
     airports: {
       visible: true,
       color: [65, 157, 80],
+      outline_color: [0, 0, 0],
       radius: 3,
       outline: 1,
-      outline_color: [0, 0, 0],
     },
-    blockground: { visible: true, color: [231, 159, 213] },
+    blockground: {
+      visible: true,
+      color: [231, 159, 213],
+    },
   });
 
   return (
