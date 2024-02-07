@@ -51,5 +51,5 @@ The task is very well designed allowing to dive into the actual CARTO tools and 
 
 - Avoid layers reload on window resize
 - Support better layers handling to be able to add more layers without changing much in the code
-- App folder structure, e.g. create a separate directory for child components and style sheets
+- Improve app folder structure, e.g. create a separate directory for child components and style sheets if there is more of those to be created
 - Tune overall appearance for better user experience
