@@ -22,26 +22,26 @@ function Toolbar({ layers, setLayers }: Props) {
   const [colorType, setColorType] = useState("fill");
 
   const toggleLayer = useCallback(
-    (item: string) => {
+    (layer: string) => {
       const layerObject = {
-        ...layers[item as keyof TLayers],
-        visible: !layers[item as keyof TLayers].visible,
+        ...layers[layer as keyof TLayers],
+        visible: !layers[layer as keyof TLayers].visible,
       };
 
       setLayers((prev) => ({
         ...prev,
-        [item]: layerObject,
+        [layer]: layerObject,
       }));
     },
     [layers, setLayers]
   );
 
   const showColorPicker = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, item: string) => {
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, layer: string) => {
       const type = (event.target as HTMLInputElement).id;
-      console.log(activePicker, item);
-      if (activePicker === "" || activePicker !== item || colorType !== type) {
-        setActivePicker(item);
+      console.log(activePicker, layer);
+      if (activePicker === "" || activePicker !== layer || colorType !== type) {
+        setActivePicker(layer);
         setColorType(type);
       } else {
         setActivePicker("");
@@ -51,41 +51,41 @@ function Toolbar({ layers, setLayers }: Props) {
   );
 
   const changeColor = useCallback(
-    (color: ColorResult, item: string) => {
+    (color: ColorResult, layer: string) => {
       let layerObject = {};
 
       if (colorType === "fill") {
         layerObject = {
-          ...layers[item as keyof TLayers],
+          ...layers[layer as keyof TLayers],
           color: [color.rgb.r, color.rgb.g, color.rgb.b],
         };
       } else {
         layerObject = {
-          ...layers[item as keyof TLayers],
+          ...layers[layer as keyof TLayers],
           outline_color: [color.rgb.r, color.rgb.g, color.rgb.b],
         };
       }
 
       setLayers((prev) => ({
         ...prev,
-        [item]: layerObject,
+        [layer]: layerObject,
       }));
     },
     [layers, setLayers, colorType]
   );
 
   const handleRadiusChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>, item: string) => {
+    (event: React.ChangeEvent<HTMLInputElement>, layer: string) => {
       let layerObject = {};
 
       layerObject = {
-        ...layers[item as keyof TLayers],
+        ...layers[layer as keyof TLayers],
         [event.target.id]: Number(event.target.value),
       };
 
       setLayers((prev) => ({
         ...prev,
-        [item]: layerObject,
+        [layer]: layerObject,
       }));
     },
     [layers, setLayers]
@@ -94,12 +94,12 @@ function Toolbar({ layers, setLayers }: Props) {
   return (
     <div className="toolbar">
       <div className="layers">
-        {Object.values(layers).map((item, index) => {
+        {Object.values(layers).map((layer, index) => {
           const layerName = Object.keys(layers)[index];
           const rgb = {
-            r: item.color[0],
-            g: item.color[1],
-            b: item.color[2],
+            r: layer.color[0],
+            g: layer.color[1],
+            b: layer.color[2],
           };
           let colorTile = {
             background: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`,
@@ -107,11 +107,11 @@ function Toolbar({ layers, setLayers }: Props) {
           };
           let outline_rgb = rgb;
 
-          if ("outline_color" in item) {
+          if ("outline_color" in layer) {
             outline_rgb = {
-              r: item.outline_color[0],
-              g: item.outline_color[1],
-              b: item.outline_color[2],
+              r: layer.outline_color[0],
+              g: layer.outline_color[1],
+              b: layer.outline_color[2],
             };
 
             colorTile = {
@@ -130,10 +130,10 @@ function Toolbar({ layers, setLayers }: Props) {
                 className="layer-trigger"
                 onClick={() => toggleLayer(layerName)}
               >
-                {item.visible ? "Disable" : "Enable"}
+                {layer.visible ? "Disable" : "Enable"}
               </button>
               <div className="triggers-wrapper">
-                {item.color ? (
+                {layer.color ? (
                   <button
                     id="fill"
                     className="color-trigger"
@@ -144,7 +144,7 @@ function Toolbar({ layers, setLayers }: Props) {
                 ) : (
                   ""
                 )}
-                {"outline_color" in item ? (
+                {"outline_color" in layer ? (
                   <button
                     id="outline"
                     className="color-trigger"
@@ -157,13 +157,13 @@ function Toolbar({ layers, setLayers }: Props) {
                 )}
               </div>
               <div className="triggers-wrapper">
-                {"radius" in item ? (
+                {"radius" in layer ? (
                   <div className="radius-trigger">
                     <div>Point radius</div>
                     <input
                       id="radius"
                       type="number"
-                      value={item.radius}
+                      value={layer.radius}
                       min="1"
                       max="50"
                       onChange={(event) => handleRadiusChange(event, layerName)}
@@ -172,13 +172,13 @@ function Toolbar({ layers, setLayers }: Props) {
                 ) : (
                   ""
                 )}
-                {"outline" in item ? (
+                {"outline" in layer ? (
                   <div className="radius-trigger">
                     <div>Outline radius</div>
                     <input
                       id="outline"
                       type="number"
-                      value={item.outline}
+                      value={layer.outline}
                       min="0"
                       max="50"
                       onChange={(event) => handleRadiusChange(event, layerName)}
