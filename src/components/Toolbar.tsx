@@ -1,10 +1,10 @@
 import { useCallback, useState } from "react";
 import { SketchPicker } from "react-color";
 
-import { TLayers } from "./types/layers";
+import { TLayers } from "../types/layers";
 import { ColorResult } from "react-color";
 
-import "./Toolbar.css";
+import "../styles/Toolbar.css";
 
 //---------------------------------------------
 

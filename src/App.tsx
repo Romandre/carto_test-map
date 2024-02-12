@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Map from "./Map";
-import Toolbar from "./Toolbar";
-import "./App.css";
+import Map from "./components/Map";
+import Toolbar from "./components/Toolbar";
+import "./styles/App.css";
 
 function App() {
   // Initial properties for layers

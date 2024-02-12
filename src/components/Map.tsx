@@ -7,9 +7,9 @@ import {
   MAP_TYPES,
 } from "@deck.gl/carto/typed";
 
-import { TLayers } from "./types/layers";
+import { TLayers } from "../types/layers";
 
-import "./Map.css";
+import "../styles/Map.css";
 
 //---------------------------------------------
 
