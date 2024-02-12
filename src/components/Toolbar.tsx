@@ -39,7 +39,6 @@ function Toolbar({ layers, setLayers }: Props) {
   const showColorPicker = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, layer: string) => {
       const type = (event.target as HTMLInputElement).id;
-      console.log(activePicker, layer);
       if (activePicker === "" || activePicker !== layer || colorType !== type) {
         setActivePicker(layer);
         setColorType(type);
