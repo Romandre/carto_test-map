@@ -40,7 +40,9 @@ The toolbar provides some simple toggle buttons and inputs for the map layer pro
 - Changing outline color (only for retail stores and world airports);
 - Changing point and outline radiuses (only for retail stores and world airports).
 
-The property values are changed directly for the `CartoLayer` object initiation. This approach is chosen for its simplicity and it seems to work well enough for small apps without major performance impact. However, I believe there is a better solution available for handling layers property change.
+Layer settings are separated for each layer type under the title of particular layer and a tile color which indicates the color of point/layer used on the map. Changing the fill/otline color will reflect on both the tile and the point/layer on the map.
+
+The layer property values are changed directly for the `CartoLayer` object initiation. This approach is chosen for its simplicity and it seems to work well enough for small apps without major performance impact. However, I believe there is a better solution available for handling layers property change.
 
 **Data management**
 
