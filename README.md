@@ -27,19 +27,20 @@ To use StaticMap without a Mapbox token, the older version of the package had to
 
 **Layers**
 
-3 layers are used on the map: retail stores, world airports and USA sociodemographics.
+3 layers from CARTO are used on the map: retail stores, world airports and USA sociodemographics.
 
 To get layers data in the app, layers had to be added to the Carto Builder map and tables querying had to be performed. The connection parameter value for `CartoLayer` have been taken from the SQL Editor modal.
 
 **Toolbar**
 
-The toolbar provides some simple toggles for the map layer properties:
+The toolbar provides some simple toggle buttons and inputs for the map layer properties:
 
 - Toggling layer visibility by "enabling"/"disabling" the layer;
-- Changing point fill and outline colors;
-- Changing point and outline radiuses.
+- Changing point/layer fill color;
+- Changing outline color (only for retail stores and world airports);
+- Changing point and outline radiuses (only for retail stores and world airports).
 
-The property values are changed directly for the `CartoLayer` object initiation. This approach is chosen for its simplicity and it seems to work well enough for small apps without major performance impacts. However, I believe there is a better solution available for handling layers property change.
+The property values are changed directly for the `CartoLayer` object initiation. This approach is chosen for its simplicity and it seems to work well enough for small apps without major performance impact. However, I believe there is a better solution available for handling layers property change.
 
 **Data management**
 
