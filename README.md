@@ -21,15 +21,17 @@ The app consists of a map along with layers on top of it and a toolbar from wher
 
 **Base map**
 
-To use StaticMap by `react-map-gl` package without a Mapbox token, the older version of the package had to be used (`react-map-gl@5`).
+The base map is loaded by <StaticMap> by `react-map-gl` package.
+To use StaticMap without a Mapbox token, the older version of the package had to be used (`react-map-gl@5`).
 
 **Layers**
 
+3 layers are used on the map: retail stores, world airports and USA sociodemographics.
 To get layers data in the app, layers had to be added to the Carto Builder map and tables querying had to be performed. The connection parameter value for `CartoLayer` have been taken from the SQL Editor modal.
 
 **Toolbar**
 
-The toolbar presents some simple toggles for the map layer properties:
+The toolbar provides some simple toggles for the map layer properties:
 
 - Toggling layer visibility by "enabling"/"disabling" the layer;
 - Changing point fill and outline colors;

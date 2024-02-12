@@ -8,7 +8,7 @@ import "../styles/Toolbar.css";
 
 //---------------------------------------------
 
-const titles = ["Retail stores", "World Airports", "USA Sociodemographics"];
+const titles = ["Retail Stores", "World Airports", "USA Sociodemographics"];
 
 type Props = {
   layers: TLayers;
@@ -37,15 +37,17 @@ function Toolbar({ layers, setLayers }: Props) {
   );
 
   const showColorPicker = useCallback(
-    (item: string, type: string) => {
-      if (activePicker === "") {
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, item: string) => {
+      const type = (event.target as HTMLInputElement).id;
+      console.log(activePicker, item);
+      if (activePicker === "" || activePicker !== item || colorType !== type) {
         setActivePicker(item);
         setColorType(type);
       } else {
         setActivePicker("");
       }
     },
-    [activePicker, setActivePicker, setColorType]
+    [activePicker, setActivePicker, colorType, setColorType]
   );
 
   const changeColor = useCallback(
@@ -133,8 +135,9 @@ function Toolbar({ layers, setLayers }: Props) {
               <div className="triggers-wrapper">
                 {item.color ? (
                   <button
+                    id="fill"
                     className="color-trigger"
-                    onClick={() => showColorPicker(layerName, "fill")}
+                    onClick={(event) => showColorPicker(event, layerName)}
                   >
                     Change fill color
                   </button>
@@ -143,8 +146,9 @@ function Toolbar({ layers, setLayers }: Props) {
                 )}
                 {"outline_color" in item ? (
                   <button
+                    id="outline"
                     className="color-trigger"
-                    onClick={() => showColorPicker(layerName, "outline")}
+                    onClick={(event) => showColorPicker(event, layerName)}
                   >
                     Change outline color
                   </button>
