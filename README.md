@@ -58,4 +58,4 @@ The task is very well designed allowing to dive into the actual CARTO tools and 
 
 - Avoid layers reload on window resize
 - Support better layers handling to be able to add more layers without changing much in the code
-- Tune overall appearance for better user experience
+- Tune overall appearance for better user experience, especially for mobile/tablet view
