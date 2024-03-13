@@ -3,6 +3,7 @@
 A React + TypeScript application with a map and layers from CARTO.
 
 App link: [carto-map-test-app](https://carto-map-test-app.netlify.app/)
+(THE CARTO API IS NO LONGER AVAILABLE)
 
 For local use, clone the repo, go to cloned "carto_test-map" directory and run following:
 
