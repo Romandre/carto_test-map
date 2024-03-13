@@ -49,13 +49,3 @@ The layer property values are changed directly for the `CartoLayer` object initi
 As the application is quite small, the data is handled through the main `App.tsx` component passing the props down to the child components `Map.tsx` and `Toolbar.tsx`. For more complex applications, Context API and/or Redux are preferable for more flexible data handling between components.
 
 ---
-
-## Task feedback
-
-The task is very well designed allowing to dive into the actual CARTO tools and documentation and also to show my React and TypeScript knowledge. This was challenging enough and I find this type of tasks really great as it gives an idea of the essence of work and dynamics in CARTO. I see that there is still a lot of stuff to study from the `deck.gl` and Carto documentations, which will be definitely my first priority and responsibility in case if I'm going to become a part of the team.
-
-### Things to improve
-
-- Avoid layers reload on window resize
-- Support better layers handling to be able to add more layers without changing much in the code
-- Tune overall appearance for better user experience, especially for mobile/tablet view
